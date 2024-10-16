@@ -23,11 +23,11 @@ git clone <repository_url>
 cd <repository_directory>
 ```
 
-3. 필수 라이브러리 설치: Python(권장 버전: 3.7 이상)이 설치되어 있어야 합니다. 아래 명령어를 사용하여 필요한 라이브러리를 설치하세요:
+2. 필수 라이브러리 설치: Python(권장 버전: 3.7 이상)이 설치되어 있어야 합니다. 아래 명령어를 사용하여 필요한 라이브러리를 설치하세요:
 ```
 pip install tensorflow keras numpy opencv-python matplotlib scikit-learn
 ```
-4. GPU 설정 (선택 사항): NVIDIA GPU가 있다면, CUDA와 cuDNN을 설치하여 GPU 가속을 활용할 수 있습니다. 자세한 내용은 TensorFlow의 GPU 설정 가이드를 참고하세요.
+3. GPU 설정 (선택 사항): NVIDIA GPU가 있다면, CUDA와 cuDNN을 설치하여 GPU 가속을 활용할 수 있습니다. 자세한 내용은 TensorFlow의 GPU 설정 가이드를 참고하세요.
 
 ### 사용 방법
 1. 데이터셋 준비:
@@ -64,4 +64,6 @@ model = load_model('transdc_unet_cbam_model.h5')
 > 프로젝트에 대한 소개와 시연 영상을 넣으세요.
 
 ## 5. 팀 소개
-> 팀원 소개 & 구성원 별 역할 분담 & 간단한 연락처를 작성하세요.
+> - 배민준, mbae059@gmail.com, Computer Scientist and Student of Computer Vision Models
+> - Bagheri Mahboubeh, mahya.mf7841@gmail.com, Computer Scientist and Student of Computer Vision Models
+> - Calderoni Echeverri Aldo Sigfrido, sigfrido.calderoni@pusan.ac.kr, Computer Scientist and Student of Computer Vision Models
