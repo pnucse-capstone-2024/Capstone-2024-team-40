@@ -13,23 +13,21 @@
 > ![image](https://github.com/user-attachments/assets/7e3a6067-6970-4fb0-82d3-edd3e081c358)
 
 ### 2.1. 사용 기술
-> NumPy version: 1.26.3
-> Pandas version: 2.2.2
-> OpenCV version: 4.10.0
-> TensorFlow version: 2.17.0
-> Keras version: 3.5.0
+> NumPy version: 1.26.3, Pandas version: 2.2.2, OpenCV version: 4.10.0, TensorFlow version: 2.17.0, Keras version: 3.5.0
 
 ## 3. 설치 및 사용 방법
 ### 설치
 1. 저장소 클론 (이미 완료된 경우 생략):
-"```
+```
 git clone <repository_url>
-cd <repository_directory>```"
+cd <repository_directory>
+```
 
-2. 필수 라이브러리 설치: Python(권장 버전: 3.7 이상)이 설치되어 있어야 합니다. 아래 명령어를 사용하여 필요한 라이브러리를 설치하세요:
-"```
-pip install tensorflow keras numpy opencv-python matplotlib scikit-learn```"
-3. GPU 설정 (선택 사항): NVIDIA GPU가 있다면, CUDA와 cuDNN을 설치하여 GPU 가속을 활용할 수 있습니다. 자세한 내용은 TensorFlow의 GPU 설정 가이드를 참고하세요.
+3. 필수 라이브러리 설치: Python(권장 버전: 3.7 이상)이 설치되어 있어야 합니다. 아래 명령어를 사용하여 필요한 라이브러리를 설치하세요:
+```
+pip install tensorflow keras numpy opencv-python matplotlib scikit-learn
+```
+4. GPU 설정 (선택 사항): NVIDIA GPU가 있다면, CUDA와 cuDNN을 설치하여 GPU 가속을 활용할 수 있습니다. 자세한 내용은 TensorFlow의 GPU 설정 가이드를 참고하세요.
 
 ### 사용 방법
 1. 데이터셋 준비:
@@ -50,15 +48,17 @@ pip install tensorflow keras numpy opencv-python matplotlib scikit-learn```"
 
 4. 모델 저장 및 평가:
 - 학습이 완료되면 모델을 파일로 저장합니다:
-"```
-model.save('transdc_unet_cbam_model.h5')"```
+```
+model.save('transdc_unet_cbam_model.h5')
+```
 - 저장된 모델을 사용하여 새로운 이미지에 대한 세그멘테이션을 수행하고, 테스트 데이터를 통해 성능을 평가하세요.
 
 5. 추론:
 - 학습된 모델을 사용하여 새로운 이미지에 대해 추론하려면 모델을 로드하고 적용합니다:
-"```
+```
 from tensorflow.keras.models import load_model
-model = load_model('transdc_unet_cbam_model.h5') ```"
+model = load_model('transdc_unet_cbam_model.h5')
+```
 
 ## 4. 소개 및 시연 영상
 > 프로젝트에 대한 소개와 시연 영상을 넣으세요.
