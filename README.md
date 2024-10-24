@@ -14,7 +14,7 @@
 ## 2. 상세설계
 ### 2.1. 시스템 구성도
 > CBAM의 적용 예와 Transformer 기반 모델과 하이브리드된 DC-UNet의 예시를 설명하는 다이어그램:
-> ![image](https://github.com/user-attachments/assets/7e3a6067-6970-4fb0-82d3-edd3e081c358)
+> ![image](https://github.com/user-attachments/assets/1e05e89a-a079-4965-a6ff-ef96f826f9de)
 
 ### 2.1. 사용 기술
 > NumPy version: 1.26.3, Pandas version: 2.2.2, OpenCV version: 4.10.0, TensorFlow version: 2.17.0, Keras version: 3.5.0
