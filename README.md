@@ -1,205 +1,73 @@
-# Template for Capstone
-이 레파지토리는 학생들이 캡스톤 프로젝트 결과물을 위한 레파지토리 생성시에 참고할 내용들을 담고 있습니다.
-1. 레파지토리 생성
-2. 레파지토리 구성
-3. 레파지토리 제출 
-4. README.md 가이드라인
-5. README.md 작성팁
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/NJK_cPkH)
+# Development of an AI Model for Glaucoma Detection through Segmentation
+## 1. 프로젝트 소개
+### 1.1. 배경 및 필요성
+녹내장은 시신경 손상으로 인해 발생하는 만성 안과 질환으로, 조기에 진단하고 치료하지 않으면 영구적인 실명으로 이어질 수 있다. 이는 선진국에서 실명의 주요 원인 중 하나로, 환자들은 시신경 손상이 발생한 후 몇 개월 또는 몇 년이 지나야 증상을 인지할 수 있어 조기 발견이 중요하다. 2040년까지 녹내장 환자 수는 약 1억 1천만 명에 이를 것으로 예상되며, 예방과 조기 치료의 중요성을 강조한다. 녹내장을 조기에 치료하기 위해서는 조기 선별검사가 필수이며, 주요 진단 방법으로는 안압 측정, 시야 검사, 시신경 두부 평가가 있다. 이 중 시신경 두부 평가는 컵-디스크 비율(CDR)을 분석하여 녹내장 손상을 정확하게 나타내는 유용한 방법이다. 안압 측정은 정상 수치를 보이는 환자도 있어 한계가 있으며, CDR이 더 정확한 지표로 평가된다. CDR 계산을 위한 시신경 원반과 컵의 수동 분할은 시간이 많이 소요되고 주관적인 판단이 필요해 경험이 적은 의사에게는 어려움이 있다. 이 과정을 자동화하면 진단의 정확성, 속도, 일관성을 개선하여 환자 치료와 조기 개입을 강화할 수 있다.
 
----
+### 1.2. 목표 및 주요 내용
+이 연구의 주요 목적은 이미지 분할 기법을 통해 녹내장을 효과적이고 신뢰성 있게 탐지하는 시스템을 개발하는 것이다. 이를 위해 기계 학습 기반의 분할 모델을 설계하고 구현하여 망막 촬영 이미지에서 시신경 원반과 시신경 컵과 같은 주요 해부학적 구조를 정확하게 식별하고 분할하는 데 중점을 둔다. 연구는 분할 모델의 정밀도를 향상시켜 건강한 시신경 구조와 녹내장 구조를 효과적으로 구분하고, 조기 녹내장 탐지를 통해 적시 개입을 가능하게 하는 것을 목표로 한다. 모델의 성능은 Dice 계수, 교차 비율(IoU), 정확도와 같은 표준 평가 지표를 사용하여 임상적으로 관련된 기준을 충족하는지 평가된다.
 
-## 1. 레파지토리 생성
-- [https://classroom.github.com/a/NJK_cPkH](https://classroom.github.com/a/NJK_cPkH)
-- 위 Github Classroom 링크에 접속해 본인 조의 github 레파지토리를 생성하세요.
-<img src="https://github.com/user-attachments/assets/b5a7f34a-e146-4253-b57d-672737a75a50" alt="깃헙 클래스룸 레포 생성" width="600" />
+본 연구에서는 CBAM, 트랜스포머 블록, DC-UNet을 포함한 혁신적인 기술을 통합하여 녹내장 검출을 위한 세분화 모델을 개선하는 것을 목표로 하였다. 모델 요약으로, CBAM의 통합을 통해 모델이 이미지의 가장 정보가 풍부한 영역에 집중할 수 있게 하였으며, 이를 통해 공간적 및 채널 측면에서 주의 메커니즘이 강화되었다. 마찬가지로, 트랜스포머 블록의 포함은 데이터 내 장거리 의존성을 포착할 수 있게 하여, 특히 의료 이미지 분석에서 중요한 역할을 하였다. 또한, DC-UNet 구조는 밀집 연결의 이점을 제공하여, 특히 제한된 데이터셋으로 학습할 때 특성 재사용과 더 효과적인 학습을 가능하게 하였다.
 
-- 레포지토리 생성 시 팀명은 `TEAM-{조 번호}` 형식으로 생성하세요.
-- 예를 들어, 2024년도 3조의 팀명은 `TEAM-03` 입니다.
-- 이 경우 `Capstone2024-TEAM-03`이란 이름으로 레파지토리가 생성됩니다.
+우리 모델이 기본 U-Net 모델에 비해 정확도 면에서 개선을 보이지는 않았으나, 핵심 성과는 접근 방식의 창의성에 있다. 우리는 기존 U-Net 모델에 현대적 기법을 통합하는 개선을 도입하였으며, 이는 향후 연구 가능성을 제시하고 있다.
 
----
+## 2. 상세설계
+### 2.1. 시스템 구성도
+> CBAM의 적용 예와 Transformer 기반 모델과 하이브리드된 DC-UNet의 예시를 설명하는 다이어그램:
+> ![image](https://github.com/user-attachments/assets/1e05e89a-a079-4965-a6ff-ef96f826f9de)
 
-## 2. 레파지토리 구성
-- 레파지토리 내에 README.md 파일 생성하고 아래의 가이드라인과 작성팁을 참고하여 README.md 파일을 작성하세요. (이 레파지토리의 SAMPLE_README.md 참조)
-- 레파지토리 내에 docs 디렉토리를 생성하고 docs 디렉토리 내에는 과제 수행 하면서 작성한 각종 보고서, 발표자료를 올려둡니다. (이 레파지토리의 docs 디렉토리 참조)
-- 그 밖에 레파지토리의 폴더 구성은 과제 결과물에 따라 자유롭게 구성하되 가급적 코드의 목적이나 기능에 따라 디렉토리를 나누어 구성하세요.
+### 2.1. 사용 기술
+> NumPy version: 1.26.3, Pandas version: 2.2.2, OpenCV version: 4.10.0, TensorFlow version: 2.17.0, Keras version: 3.5.0
 
----
+## 3. 설치 및 사용 방법
+### 설치
+1. 저장소 클론 (이미 완료된 경우 생략):
+  ```
+  git clone <repository_url>
+  cd <repository_directory>
+  ```
 
-## 3. 레파지토리 제출 
+2. 필수 라이브러리 설치: Python(권장 버전: 3.7 이상)이 설치되어 있어야 합니다. 아래 명령어를 사용하여 필요한 라이브러리를 설치하세요:
+  ```
+  pip install tensorflow keras numpy opencv-python matplotlib scikit-learn
+  ```
+3. GPU 설정 (선택 사항): NVIDIA GPU가 있다면, CUDA와 cuDNN을 설치하여 GPU 가속을 활용할 수 있습니다. 자세한 내용은 TensorFlow의 GPU 설정 가이드를 참고하세요.
 
-- **`[주의]` 레파지토리 제출**은 해당 레파지토리의 ownership을 **학과 계정**으로 넘기는 것이므로 되돌릴 수 없습니다.
-- **레파지토리 제출** 전, 더 이상 수정 사항이 없는지 다시 한번 확인하세요.
-- github 레파지토리에서 Settings > General > Danger zone > Transfer 클릭
-  <img src="https://github.com/user-attachments/assets/cb2361d4-e07e-4b5d-9116-aa80dddd8a8b" alt="소유주 변경 경로" width="500" />
-  
-- [ Specify an organization or username ]에 'PNUCSE'를 입력하고 확인 메세지를 입력하세요.
-  <img src="https://github.com/user-attachments/assets/7c63955d-dcfe-4ac3-bdb6-7d2620575f3a" alt="소유주 변경" width="400" />
+### 사용 방법
+1. 데이터셋 준비:
+- 이미지를 저장할 폴더와 세그멘테이션 마스크를 저장할 폴더로 데이터셋을 구성합니다.
+- 노트북에서 데이터 경로를 데이터셋 폴더 경로에 맞게 수정하세요.
 
----
+2. 노트북 실행:
+- Jupyter 노트북 파일 TransDC-Unet with CBAM.ipynb를 엽니다.
+- 노트북의 순서를 따라 진행하세요. 순서에는 다음 내용이 포함됩니다:
+  - 데이터 로딩 및 전처리
+  - TransDC-UNet 및 CBAM 모델 아키텍처 구성
+  - 적절한 손실 함수 및 메트릭을 사용하여 모델 컴파일
+  - 데이터를 이용한 모델 학습
 
-## 4. README.md 가이드 라인
-- README 파일 작성시에 아래의 5가지 항목의 내용은 필수적으로 포함해야 합니다.
-- 아래의 5가지 항목이외에 프로젝트의 이해를 돕기 위한 내용을 추가해도 됩니다.
-- SAMPLE_README.md 이 단순한 형태의 예제이니 참고하세요.
+3. 모델 학습:
+- 배치 크기, 에포크, 학습률 등의 하이퍼파라미터를 설정합니다.
+- 학습 과정을 모니터링하며 필요시 설정을 조정하세요.
 
-```markdown
-### 1. 프로젝트 소개
-#### 1.1. 배경 및 필요성
-> 프로젝트를 실행하게 된 배경 및 필요성을 작성하세요.
+4. 모델 저장 및 평가:
+- 학습이 완료되면 모델을 파일로 저장합니다:
+  ```
+  model.save('transdc_unet_cbam_model.h5')
+  ```
+- 저장된 모델을 사용하여 새로운 이미지에 대한 세그멘테이션을 수행하고, 테스트 데이터를 통해 성능을 평가하세요.
 
-#### 1.2. 목표 및 주요 내용
-> 프로젝트의 목표 및 주요 내용을 작성하세요.
+5. 추론:
+- 학습된 모델을 사용하여 새로운 이미지에 대해 추론하려면 모델을 로드하고 적용합니다:
+  ```
+  from tensorflow.keras.models import load_model
+  model = load_model('transdc_unet_cbam_model.h5')
+  ```
 
-### 2. 상세설계
-#### 2.1. 시스템 구성도
-> 시스템 구성도(infra, front, back등의 node 간의 관계)의 사진을 삽입하세요.
+## 4. 소개 및 시연 영상
+[![2024년 전기 졸업과제 40 EPA: 안질환 검출 인공지능 모델 개발](https://img.youtube.com/vi/gxruVnAXiyQ/0.jpg)](https://www.youtube.com/watch?v=gxruVnAXiyQ)
 
-#### 2.1. 사용 기술
-> 스택 별(backend, frontend, designer등) 사용한 기술 및 버전을 작성하세요.
-> 
-> ex) React.Js - React14, Node.js - v20.0.2
-
-### 3. 설치 및 사용 방법
-> 제품을 설치하기 위헤 필요한 소프트웨어 및 설치 방법을 작성하세요.
->
-> 제품을 설치하고 난 후, 실행 할 수 있는 방법을 작성하세요.
-
-### 4. 소개 및 시연 영상
-> 프로젝트에 대한 소개와 시연 영상을 넣으세요.
-
-### 5. 팀 소개
-> 팀원 소개 & 구성원 별 역할 분담 & 간단한 연락처를 작성하세요.
-```
-
-## 5. README.md 작성팁 
-* 마크다운 언어를 이용해 README.md 파일을 작성할 때 참고할 수 있는 마크다운 언어 문법을 공유합니다.  
-* 다양한 예제와 보다 자세한 문법은 [이 문서](https://www.markdownguide.org/basic-syntax/)를 참고하세요.
-
-### 5.1. 헤더 Header
-```
-# This is a Header 1
-## This is a Header 2
-### This is a Header 3
-#### This is a Header 4
-##### This is a Header 5
-###### This is a Header 6
-####### This is a Header 7 은 지원되지 않습니다.
-```
-<br />
-
-### 5.2. 인용문 BlockQuote
-```
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
-```
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
-<br />
-
-### 5.3. 목록 List
-* **Ordered List**
-```
-1. first
-2. second
-3. third  
-```
-1. first
-2. second
-3. third
-<br />
-
-* **Unordered List**
-```
-* 하나
-  * 둘
-
-+ 하나
-  + 둘
-
-- 하나
-  - 둘
-```
-* 하나
-  * 둘
-
-+ 하나
-  + 둘
-
-- 하나
-  - 둘
-<br />
-
-### 5.4. 코드 CodeBlock
-* 코드 블럭 이용 '``'
-```
-여러줄 주석 "```" 이용
-"```
-#include <stdio.h>
-int main(void){
-  printf("Hello world!");
-  return 0;
-}
-```"
-
-단어 주석 "`" 이용
-"`Hello world`"
-
-* 큰 따움표(") 없이 사용하세요.
-``` 
-<br />
-
-### 5.5. 링크 Link
-```
-[Title](link)
-[부산대학교 정보컴퓨터공학부](https://cse.pusan.ac.kr/cse/index..do)
-
-<link>
-<https://cse.pusan.ac.kr/cse/index..do>
-``` 
-[부산대학교 정보컴퓨터공학부](https://cse.pusan.ac.kr/cse/index..do)
-
-<https://cse.pusan.ac.kr/cse/index..do>
-<br />
-
-### 5.6. 강조 Highlighting
-```
-*single asterisks*
-_single underscores_
-**double asterisks**
-__double underscores__
-~~cancelline~~
-```
-*single asterisks* <br />
-_single underscores_ <br />
-**double asterisks** <br />
-__double underscores__ <br />
-~~cancelline~~  <br />
-<br />
-
-### 5.7. 이미지 Image
-```
-<img src="image URL" width="600px" title="Title" alt="Alt text"></img>
-![Alt text](image URL "Optional title")
-```
-- 웹에서 작성한다면 README.md 내용 안으로 이미지를 드래그 앤 드롭하면 이미지가 생성됩니다.
-- 웹이 아닌 로컬에서 작성한다면, github issue에 이미지를 드래그 앤 드롭하여 image url 을 얻을 수 있습니다. (URL만 복사하고 issue는 제출 안 함.)
-  <img src="https://github.com/user-attachments/assets/0fe3bff1-7a2b-4df3-b230-cac4ef5f6d0b" alt="이슈에 image 올림" width="600" />
-  <img src="https://github.com/user-attachments/assets/251c6d42-b36b-4ad4-9cfa-fa2cc67a9a50" alt="image url 복사" width="600" />
-
-
-### 5.8. 유튜브 영상 추가
-```markdown
-[![영상 이름](유튜브 영상 썸네일 URL)](유튜브 영상 URL)
-[![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg)](https://www.youtube.com/watch?v=zh_gQ_lmLqE)    
-```
-[![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg)](https://www.youtube.com/watch?v=zh_gQ_lmLqE)    
-
-- 이때 유튜브 영상 썸네일 URL은 유투브 영상 URL로부터 다음과 같이 얻을 수 있습니다.
-
-- `Youtube URL`: https://www.youtube.com/watch?v={동영상 ID}
-- `Youtube Thumbnail URL`: http://img.youtube.com/vi/{동영상 ID}/0.jpg 
-- 예를 들어, https://www.youtube.com/watch?v=zh_gQ_lmLqE 라고 하면 썸네일의 주소는 http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg 이다.
-
+## 5. 팀 소개
+> - 배민준, mbae059@gmail.com, Computer Scientist and Student of Computer Vision Models
+> - Bagheri Mahboubeh, mahya.mf7841@gmail.com, Computer Scientist and Student of Computer Vision Models
+> - Calderoni Echeverri Aldo Sigfrido, sigfrido.calderoni@pusan.ac.kr, Computer Scientist and Student of Computer Vision Models
